@@ -40,7 +40,7 @@ struct ElementAPIClient {
   
   static func getFavorites(completion: @escaping (Result<[Element], AppError>) -> ()) {
     
-    let endpointURLString = ""
+    let endpointURLString = "http://5c1d79abbc26950013fbcaa9.mockapi.io/api/v1/favorites"
     
     guard let url = URL(string: endpointURLString) else {
       completion(.failure(.badURL(endpointURLString)))

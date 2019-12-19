@@ -16,6 +16,7 @@
 		587F4C1623ABDB42009F77CA /* UIImages+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4C1523ABDB42009F77CA /* UIImages+Extensions.swift */; };
 		587F4C1823ABE85A009F77CA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4C1723ABE85A009F77CA /* DetailViewController.swift */; };
 		587F4C1A23ABEE5E009F77CA /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4C1923ABEE5E009F77CA /* UIViewController+Alert.swift */; };
+		587F4C1C23ABF2DA009F77CA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4C1B23ABF2DA009F77CA /* FavoritesViewController.swift */; };
 		58850A3C23ABCDE600777116 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58850A3B23ABCDE600777116 /* NetworkHelper.swift */; };
 		58850A3E23ABCE2D00777116 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58850A3D23ABCE2D00777116 /* AppError.swift */; };
 		58850A4123ABCE6A00777116 /* ElementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58850A4023ABCE6A00777116 /* ElementsModel.swift */; };
@@ -34,6 +35,7 @@
 		587F4C1523ABDB42009F77CA /* UIImages+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImages+Extensions.swift"; sourceTree = "<group>"; };
 		587F4C1723ABE85A009F77CA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		587F4C1923ABEE5E009F77CA /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		587F4C1B23ABF2DA009F77CA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		58850A3B23ABCDE600777116 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		58850A3D23ABCE2D00777116 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		58850A4023ABCE6A00777116 /* ElementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsModel.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				5734756321DA90C700FB6177 /* ViewController.swift */,
 				587F4C1723ABE85A009F77CA /* DetailViewController.swift */,
+				587F4C1B23ABF2DA009F77CA /* FavoritesViewController.swift */,
 				587F4C1223ABD9F6009F77CA /* CustomElementCell.swift */,
 			);
 			name = Controllers;
@@ -206,6 +209,7 @@
 				5734756421DA90C700FB6177 /* ViewController.swift in Sources */,
 				587F4C1623ABDB42009F77CA /* UIImages+Extensions.swift in Sources */,
 				587F4C1A23ABEE5E009F77CA /* UIViewController+Alert.swift in Sources */,
+				587F4C1C23ABF2DA009F77CA /* FavoritesViewController.swift in Sources */,
 				587F4C1323ABD9F6009F77CA /* CustomElementCell.swift in Sources */,
 				58850A3C23ABCDE600777116 /* NetworkHelper.swift in Sources */,
 				5734756221DA90C700FB6177 /* AppDelegate.swift in Sources */,

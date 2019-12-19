@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  FavoritesViewController.swift
 //  Elements
 //
-//  Created by Alex Paul on 12/31/18.
-//  Copyright © 2018 Pursuit. All rights reserved.
+//  Created by Eric Davenport on 12/19/19.
+//  Copyright © 2019 Pursuit. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class FavoritesViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -19,25 +19,28 @@ class ViewController: UIViewController {
       }
     }
   }
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.delegate = self
+    
     tableView.dataSource = self
-    getElements()
+    tableView.delegate = self
+    
+    getFavorites()
+    
   }
   
-  func getElements() {
-    ElementAPIClient.getElements( completion: { [weak self] (result) in
+  func getFavorites() {
+    ElementAPIClient.getFavorites { [weak self] (result) in
       switch result {
       case .failure(let appError):
         print("\(appError)")
-      case .success(let elements):
+      case .success(let element):
         DispatchQueue.main.async {
-          self?.elements = elements
+          self?.elements = element
         }
       }
-    } )
+    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,26 +54,33 @@ class ViewController: UIViewController {
     detailController.thisElement = thisElement
     
   }
+  
+  
+  
+  
+  
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let elementCell = tableView.dequeueReusableCell(withIdentifier: "elementCell", for: indexPath) as? CustomElementCell else {
-      fatalError("failed to deque cell propely, check MainViewController")
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as? CustomElementCell else {
+      fatalError("failed to deque from favorite vc")
     }
     
     let element = elements[indexPath.row]
     
-    elementCell.configureCell(for: element)
+    cell.configureCell(for: element)
     
-    return elementCell
+    
+    return cell
+    
+    
   }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return elements.count
   }
-  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 260
+    return 150
   }
 }
-

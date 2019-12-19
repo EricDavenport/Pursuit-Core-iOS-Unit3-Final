@@ -18,7 +18,7 @@ class CustomElementCell: UITableViewCell {
     
     DispatchQueue.main.async {
       self.nameLabel.text = element.name
-      self.infoLabel.text = "\(element.number) \(element.period)"
+      self.infoLabel.text = "Discovered by: \(String(describing: element.discovered_by ?? "N/A"))"
       self.elementImageView.getImage(with: self.imageString(for: element)) { [weak self] (result) in
         switch result {
         case .failure:
@@ -32,7 +32,6 @@ class CustomElementCell: UITableViewCell {
         }
       }
     }
-    
   }
   
   func imageString(for element: Element) -> String {

@@ -10,7 +10,14 @@ import UIKit
 
 class DetailViewController: UIViewController {
   
+  @IBOutlet weak var favoriteButton: UIBarButtonItem!
   @IBOutlet weak var elementImageView: UIImageView!
+  @IBOutlet weak var elementWeight: UILabel!
+  
+  @IBOutlet weak var elementName: UILabel!
+  @IBOutlet weak var elementSymbol: UILabel!
+  @IBOutlet weak var elementNumber: UILabel!
+  
   
   var thisElement: Element?
   
@@ -20,15 +27,49 @@ class DetailViewController: UIViewController {
   }
   
   
+  
   func updateDetailUI() {
     guard let element = thisElement else {
       fatalError("could not acces element type")
     }
+    navigationItem.title = thisElement!.name.uppercased()
+    elementWeight.text = thisElement?.atomic_mass?.description
+    elementName.text = thisElement?.name
+    elementSymbol.text = thisElement?.symbol
+    elementNumber.text = thisElement?.number.description
     elementImageView.getImage(with: imageString(for: element)) {[weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async {
           self?.elementImageView.image = UIImage(systemName: "sun.min")
+        }
+      case .success(let image):
+        DispatchQueue.main.async {
+          self?.elementImageView.image = image
+        }
+        
+      }
+      
+    }
+  }
+  
+  
+  func updateFavoriteUI(element: Element) {
+    DispatchQueue.main.async {
+      self.favoriteButton.image = UIImage(systemName: "heart.fill")
+      self.favoriteButton.isEnabled = false
+      
+    }
+    guard let element = thisElement else {
+      fatalError("could not acces element type")
+    }
+    navigationItem.title = thisElement!.name.uppercased()
+    elementImageView.getImage(with: imageString(for: element)) {[weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async {
+          self?.elementImageView.image = UIImage(systemName: "sun.min")
+          
         }
       case .success(let image):
         DispatchQueue.main.async {
@@ -47,7 +88,7 @@ class DetailViewController: UIViewController {
       return
     }
     
-    let favorite = Element(name: element.name, appearance: element.appearance, atomic_mass: element.atomic_mass, boil: element.boil, category: element.category, summary: element.summary, symbol: element.symbol, number: element.number, period: element.period, melt: element.melt, density: element.density, discovered_by: element.discovered_by, favoritedBy: "Eric D.")
+    let favorite = Element(name: element.name, appearance: element.appearance, atomic_mass: element.atomic_mass, boil: element.boil, category: element.category, summary: element.summary, symbol: element.symbol, number: element.number, melt: element.melt, density: element.density, discovered_by: element.discovered_by, favoritedBy: "Eric D.")
     
     ElementAPIClient.makeFavorite(element: favorite) {[weak self, weak sender] (result) in
       DispatchQueue.main.async {
