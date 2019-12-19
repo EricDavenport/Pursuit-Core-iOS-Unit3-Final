@@ -12,6 +12,9 @@ class FavoritesViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
+  private var refreshControl: UIRefreshControl!
+
+  
   var elements = [Element]() {
     didSet {
       DispatchQueue.main.async {
@@ -25,19 +28,27 @@ class FavoritesViewController: UIViewController {
     
     tableView.dataSource = self
     tableView.delegate = self
-    
+    configureRefreshControl()
     getFavorites()
     
   }
   
-  func getFavorites() {
+  private func configureRefreshControl() {
+    refreshControl = UIRefreshControl()
+    tableView.refreshControl = refreshControl
+    refreshControl.addTarget(self, action: #selector(getFavorites), for: .valueChanged)
+  }
+  
+  @objc func getFavorites() {
     ElementAPIClient.getFavorites { [weak self] (result) in
       switch result {
       case .failure(let appError):
         print("\(appError)")
+        self?.refreshControl.endRefreshing()
       case .success(let element):
         DispatchQueue.main.async {
           self?.elements = element
+          self?.refreshControl.endRefreshing()
         }
       }
     }
