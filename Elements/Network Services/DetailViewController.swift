@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     updateDetailUI()
+    disconnectHeart(for: thisElement!)
   }
   
   
@@ -54,32 +55,15 @@ class DetailViewController: UIViewController {
   }
   
   
-  func updateFavoriteUI(element: Element) {
-    DispatchQueue.main.async {
-      self.favoriteButton.image = UIImage(systemName: "heart.fill")
-      self.favoriteButton.isEnabled = false
-      
-    }
-    guard let element = thisElement else {
-      fatalError("could not acces element type")
-    }
-    navigationItem.title = thisElement!.name.uppercased()
-    elementImageView.getImage(with: imageString(for: element)) {[weak self] (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async {
-          self?.elementImageView.image = UIImage(systemName: "sun.min")
-          
-        }
-      case .success(let image):
-        DispatchQueue.main.async {
-          self?.elementImageView.image = image
-        }
-        
+  func disconnectHeart(for element: Element) {
+    if element.favoritedBy != nil {
+      DispatchQueue.main.async {
+        self.favoriteButton.isEnabled = false
+        self.favoriteButton.image = UIImage(systemName: "heart.fill")
       }
-      
     }
   }
+
   @IBAction func favoriteButton(_ sender: UIBarButtonItem) {
     
     guard let element = thisElement else {

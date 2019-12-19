@@ -19,6 +19,7 @@ class ViewController: UIViewController {
       }
     }
   }
+  var additionalElements = [Element]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,14 +28,26 @@ class ViewController: UIViewController {
     getElements()
   }
   
+  
   func getElements() {
     ElementAPIClient.getElements( completion: { [weak self] (result) in
       switch result {
       case .failure(let appError):
         print("\(appError)")
       case .success(let elements):
+        ElementAPIClient.additionalEighteenElements { (result) in
+          switch result {
+          case .failure(let appError2):
+            print("additional element not found Error:\(appError2)")
+          case .success(let element2):
+            DispatchQueue.main.async {
+              self?.additionalElements = element2
+              self?.elements.append(contentsOf: element2)
+            }
+          }
+        }
         DispatchQueue.main.async {
-          self?.elements = elements
+          self?.elements.append(contentsOf: elements)
         }
       }
     } )

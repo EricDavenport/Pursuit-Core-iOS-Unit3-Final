@@ -43,6 +43,7 @@ class FavoritesViewController: UIViewController {
     }
   }
   
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let navController = segue.destination as? UINavigationController,
       let detailController = navController.viewControllers.first as? DetailViewController,
